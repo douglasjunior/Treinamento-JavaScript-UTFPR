@@ -2,3 +2,4 @@ node_modules
 package-lock.json
 *.sqlite
 yarn.lock
+04 - Autenticação, Debug e Babel com NodeJS/GerenciadorDeTarefasCompleto/dist
