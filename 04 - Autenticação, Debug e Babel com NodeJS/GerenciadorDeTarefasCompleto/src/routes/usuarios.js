@@ -18,7 +18,7 @@ module.exports = {
 const DATE_FORMAT = 'YYYY-MM-DD';
 const SALT_ROUNDS = 12; // quanto mais rounds, mais seguro e mais lento para criptografar a senha
 
-const USER_VALIDATOR = createValidator({
+const USER_VALIDATOR = {
     nome: {
         in: 'body',
         notEmpty: true,
@@ -49,13 +49,13 @@ const USER_VALIDATOR = createValidator({
             options: [{ min: 6, max: 8 }],
         },
     }
-});
+};
 
 /**
  * Cadastro de usuário
  */
 router.post('/',
-    USER_VALIDATOR,
+    createValidator(USER_VALIDATOR),
     (request, response) => {
         const usuario = {
             nome: request.body.nome,
@@ -98,6 +98,7 @@ router.get('/:usuarioId',
         Usuario.findById(usuarioId, {
             include: [{
                 model: Tarefa,
+                attributes: ['id', 'titulo'],
                 required: false // true = inner join, false = left join
             }]
         }).then(usuario => {
@@ -116,7 +117,14 @@ router.get('/:usuarioId',
 * Alteração de usuário
 */
 router.put('/:usuarioId',
-    USER_VALIDATOR,
+    createValidator({
+        ...USER_VALIDATOR,
+        usuarioId: {
+            in: 'params',
+            isInt: true,
+            notEmpty: true,
+        }
+    }),
     checkTokenMiddleware,
     (request, response) => {
         const usuarioId = request.params.usuarioId;

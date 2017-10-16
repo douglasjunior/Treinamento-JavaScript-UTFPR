@@ -1,6 +1,7 @@
 import express from 'express';
 
 import { checkTokenMiddleware } from '../utils/JWT'
+import { createValidator } from '../utils/Validator'
 import models, { sequelize } from '../models';
 
 const { Usuario, Tarefa } = models;
@@ -12,7 +13,24 @@ module.exports = {
     path: '/tarefas'
 };
 
+const TAREFA_VALIDATOR = {
+    titulo: {
+        in: 'body',
+        isLength: {
+            options: [{ min: 1, max: 200 }],
+        },
+    },
+    descricao: {
+        in: 'body',
+        optional: true,
+        isLength: {
+            options: [{ min: 1, }],
+        },
+    },
+};
+
 router.post('/',
+    createValidator(TAREFA_VALIDATOR),
     checkTokenMiddleware,
     (request, response) => {
         const usuarioId = request.decodedToken.id;
@@ -35,17 +53,24 @@ router.post('/',
     });
 
 router.get('/:tarefaId',
+    createValidator({
+        tarefaId: {
+            in: 'params',
+            isInt: true,
+            notEmpty: true,
+        }
+    }),
     checkTokenMiddleware,
     (request, response) => {
         const tarefaId = request.params.tarefaId;
         const usuarioId = request.decodedToken.id;
 
         Tarefa.findById(tarefaId, {
-            where: {
-                usuarioId: usuarioId
-            },
             include: [{
-                model: Usuario
+                model: Usuario,
+                where: {
+                    id: usuarioId
+                }
             }]
         }).then(tarefa => {
             if (tarefa) {
@@ -60,6 +85,14 @@ router.get('/:tarefaId',
     });
 
 router.put('/:tarefaId',
+    createValidator({
+        ...TAREFA_VALIDATOR,
+        tarefaId: {
+            in: 'params',
+            isInt: true,
+            notEmpty: true,
+        }
+    }),
     checkTokenMiddleware,
     (request, response) => {
         const tarefaId = request.params.tarefaId;
@@ -88,6 +121,13 @@ router.put('/:tarefaId',
     });
 
 router.delete('/:tarefaId',
+    createValidator({
+        tarefaId: {
+            in: 'params',
+            isInt: true,
+            notEmpty: true,
+        }
+    }),
     checkTokenMiddleware,
     (request, response) => {
         const tarefaId = request.params.tarefaId;
@@ -111,6 +151,13 @@ router.delete('/:tarefaId',
     });
 
 router.get('/',
+    createValidator({
+        titulo: {
+            in: 'query',
+            optional: true,
+            notEmpty: true,
+        }
+    }),
     checkTokenMiddleware,
     (request, response) => {
         const titulo = request.query.titulo;
