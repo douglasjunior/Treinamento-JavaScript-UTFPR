@@ -60,12 +60,14 @@ router.post('/',
         const usuario = {
             nome: request.body.nome,
             email: request.body.email,
-            nascimento: moment(request.body.nascimento, DATE_FORMAT, true),
+            nascimento: moment(request.body.nascimento, DATE_FORMAT, true).toDate(),
             senha: bcrypt.hashSync(request.body.senha, SALT_ROUNDS) // criptografa a senha antes de salvar
         };
 
         Usuario.create(usuario)
             .then((_usuario) => {
+                _usuario = _usuario.get({ plain: true });
+                delete _usuario.senha;
                 response.status(201).json(_usuario);
             }).catch(ex => {
                 console.error(ex);
@@ -141,7 +143,7 @@ router.put('/:usuarioId',
                 if (usuario) {
                     usuario.nome = request.body.nome;
                     usuario.email = request.body.email;
-                    usuario.nascimento = moment(request.body.nascimento, DATE_FORMAT, true);
+                    usuario.nascimento = moment(request.body.nascimento, DATE_FORMAT, true).toDate();
                     usuario.senha = bcrypt.hashSync(request.body.senha, SALT_ROUNDS) // criptografa a senha antes de salvar
                     return usuario.save();
                 } else {

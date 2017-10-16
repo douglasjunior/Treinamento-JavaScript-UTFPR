@@ -1,0 +1,18 @@
+{
+    "version": "0.1.0",
+    "command": "npm",
+    "isShellCommand": true,
+    "args": [
+        "run"
+    ],
+    "showOutput": "silent",
+    "tasks": [
+        {
+            "taskName": "build",
+            "isBuildCommand": false,
+            "isTestCommand": false,
+            "showOutput": "silent",
+            "args": []
+        }
+    ]
+}
