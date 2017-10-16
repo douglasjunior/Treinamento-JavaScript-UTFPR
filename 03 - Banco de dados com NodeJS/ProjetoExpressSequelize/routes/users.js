@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const models = require('../models');
 const Usuario = models.Usuario;
+const Tarefa = models.Tarefa;
 
 router.post('/', (request, response) => {
     const usuario = {
@@ -23,17 +24,23 @@ router.post('/', (request, response) => {
 router.get('/:usuarioId', (request, response) => {
     const usuarioId = request.params.usuarioId;
 
-    Usuario.findById(usuarioId)
-        .then(usuario => {
-            if (usuario) {
-                response.status(200).json(usuario);
-            } else {
-                response.status(404).send('Usuário não encontrado.');
-            }
-        }).catch(ex => {
-            console.error(ex);
-            response.status(400).send();
-        });
+    Usuario.findById(usuarioId, {
+        attributes: ['id', 'nome', 'email'],
+        include: [{
+            model: Tarefa,
+            required: false,
+            attributes: ['id', 'titulo']
+        }]
+    }).then(usuario => {
+        if (usuario) {
+            response.status(200).json(usuario);
+        } else {
+            response.status(404).send('Usuário não encontrado.');
+        }
+    }).catch(ex => {
+        console.error(ex);
+        response.status(400).send();
+    });
 });
 
 router.put('/:usuarioId', (request, response) => {
@@ -107,6 +114,24 @@ router.get('/', (request, response) => {
         console.error(ex);
         response.status(400).send();
     })
+});
+
+// http://localhost:3000/users/1/tarefas
+router.post('/:usuarioId/tarefas', (request, response) => {
+    const usuarioId = request.params.usuarioId;
+    const tarefa = {
+        titulo: request.body.titulo,
+        descricao: request.body.descricao,
+        usuarioId: usuarioId,
+    };
+
+    Tarefa.create(tarefa)
+        .then(_tarefa => {
+            response.status(201).json(_tarefa);
+        }).catch(ex => {
+            console.error(ex);
+            response.status(400).send();
+        })
 });
 
 module.exports = router;

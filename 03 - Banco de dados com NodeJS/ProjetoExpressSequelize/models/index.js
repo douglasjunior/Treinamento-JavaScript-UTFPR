@@ -33,7 +33,31 @@ const Usuario = sequelize.define('usuario', {
     email: Sequelize.STRING(150),
 });
 
+const Tarefa = sequelize.define('tarefa', {
+    id: {
+        primaryKey: true,
+        autoIncrement: true,
+        type: Sequelize.BIGINT,
+    },
+    titulo: {
+        allowNull: false,
+        type: Sequelize.STRING(200),
+    },
+    descricao: Sequelize.TEXT
+});
+
+Usuario.hasMany(Tarefa, {
+    onDelete: 'NO ACTION',
+    onUpdate: 'NO ACTION',
+});
+
+Tarefa.belongsTo(Usuario, {
+    onDelete: 'NO ACTION',
+    onUpdate: 'NO ACTION',
+});
+
 module.exports = {
     sequelize,
     Usuario,
+    Tarefa,
 }

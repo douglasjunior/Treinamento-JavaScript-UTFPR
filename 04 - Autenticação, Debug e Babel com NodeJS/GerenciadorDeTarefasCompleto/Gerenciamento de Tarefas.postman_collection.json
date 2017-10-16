@@ -1,0 +1,242 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Gerenciamento de Tarefas",
+		"_postman_id": "1d8f2e0e-feb9-6f95-4002-b2827a0ff153",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/usuarios",
+			"request": {
+				"url": "http://localhost:3000/usuarios",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Douglas Junior\",\n  \"email\": \"douglas@mail.com\",\n  \"nascimento\": \"1989-05-17\",\n  \"senha\": \"senha123\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/usuarios/login",
+			"request": {
+				"url": "http://localhost:3000/usuarios/login",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"douglas@mail.com\",\n  \"senha\": \"senha123\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/usuarios/1",
+			"request": {
+				"url": "http://localhost:3000/usuarios/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6IkRvdWdsYXMgSnVuaW9yIiwiZW1haWwiOiJkb3VnbGFzQG1haWwuY29tIiwibmFzY2ltZW50byI6IjE5ODktMDUtMTciLCJjcmVhdGVkQXQiOiIyMDE3LTEwLTE2VDAyOjE1OjQ3LjY4MloiLCJ1cGRhdGVkQXQiOiIyMDE3LTEwLTE2VDAyOjE1OjQ3LjY4MloiLCJpYXQiOjE1MDgxMjAxNjN9.MNQpcApy-nuLTGh-OMwmcNEh7sQcVwWBKfo9E8qwmdA",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/usuarios/1",
+			"request": {
+				"url": "http://localhost:3000/usuarios/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6IkRvdWdsYXMgSnVuaW9yIiwiZW1haWwiOiJkb3VnbGFzQG1haWwuY29tIiwibmFzY2ltZW50byI6IjE5ODktMDUtMTciLCJjcmVhdGVkQXQiOiIyMDE3LTEwLTE2VDAyOjE1OjQ3LjY4MloiLCJ1cGRhdGVkQXQiOiIyMDE3LTEwLTE2VDAyOjE1OjQ3LjY4MloiLCJpYXQiOjE1MDgxMjAxNjN9.MNQpcApy-nuLTGh-OMwmcNEh7sQcVwWBKfo9E8qwmdA",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Douglas Nassif\",\n  \"email\": \"douglas@mail.com\",\n  \"nascimento\": \"1989-05-17\",\n  \"senha\": \"senha123\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/tarefas",
+			"request": {
+				"url": "http://localhost:3000/tarefas",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6IkRvdWdsYXMgSnVuaW9yIiwiZW1haWwiOiJkb3VnbGFzQG1haWwuY29tIiwibmFzY2ltZW50byI6IjE5ODktMDUtMTciLCJjcmVhdGVkQXQiOiIyMDE3LTEwLTE2VDAyOjE1OjQ3LjY4MloiLCJ1cGRhdGVkQXQiOiIyMDE3LTEwLTE2VDAyOjE1OjQ3LjY4MloiLCJpYXQiOjE1MDgxMjAxNjN9.MNQpcApy-nuLTGh-OMwmcNEh7sQcVwWBKfo9E8qwmdA",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"titulo\": \"Aprender JavaScript\",\n  \"descricao\": \"Começar estudando NodeJS\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/tarefas",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/tarefas?titulo=aprender",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"tarefas"
+					],
+					"query": [
+						{
+							"key": "titulo",
+							"value": "aprender",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6IkRvdWdsYXMgSnVuaW9yIiwiZW1haWwiOiJkb3VnbGFzQG1haWwuY29tIiwibmFzY2ltZW50byI6IjE5ODktMDUtMTciLCJjcmVhdGVkQXQiOiIyMDE3LTEwLTE2VDAyOjE1OjQ3LjY4MloiLCJ1cGRhdGVkQXQiOiIyMDE3LTEwLTE2VDAyOjE1OjQ3LjY4MloiLCJpYXQiOjE1MDgxMjAxNjN9.MNQpcApy-nuLTGh-OMwmcNEh7sQcVwWBKfo9E8qwmdA",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"titulo\": \"Aprender JavaScript\",\n  \"descricao\": \"Começar estudando NodeJS\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/tarefas/1",
+			"request": {
+				"url": "http://localhost:3000/tarefas/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6IkRvdWdsYXMgSnVuaW9yIiwiZW1haWwiOiJkb3VnbGFzQG1haWwuY29tIiwibmFzY2ltZW50byI6IjE5ODktMDUtMTciLCJjcmVhdGVkQXQiOiIyMDE3LTEwLTE2VDAyOjE1OjQ3LjY4MloiLCJ1cGRhdGVkQXQiOiIyMDE3LTEwLTE2VDAyOjE1OjQ3LjY4MloiLCJpYXQiOjE1MDgxMjAxNjN9.MNQpcApy-nuLTGh-OMwmcNEh7sQcVwWBKfo9E8qwmdA",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"titulo\": \"Aprender JavaScript\",\n  \"descricao\": \"Começar estudando NodeJS\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/tarefas/1",
+			"request": {
+				"url": "http://localhost:3000/tarefas/1",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6IkRvdWdsYXMgSnVuaW9yIiwiZW1haWwiOiJkb3VnbGFzQG1haWwuY29tIiwibmFzY2ltZW50byI6IjE5ODktMDUtMTciLCJjcmVhdGVkQXQiOiIyMDE3LTEwLTE2VDAyOjE1OjQ3LjY4MloiLCJ1cGRhdGVkQXQiOiIyMDE3LTEwLTE2VDAyOjE1OjQ3LjY4MloiLCJpYXQiOjE1MDgxMjAxNjN9.MNQpcApy-nuLTGh-OMwmcNEh7sQcVwWBKfo9E8qwmdA",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/tarefas/1",
+			"request": {
+				"url": "http://localhost:3000/tarefas/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6IkRvdWdsYXMgSnVuaW9yIiwiZW1haWwiOiJkb3VnbGFzQG1haWwuY29tIiwibmFzY2ltZW50byI6IjE5ODktMDUtMTciLCJjcmVhdGVkQXQiOiIyMDE3LTEwLTE2VDAyOjE1OjQ3LjY4MloiLCJ1cGRhdGVkQXQiOiIyMDE3LTEwLTE2VDAyOjE1OjQ3LjY4MloiLCJpYXQiOjE1MDgxMjAxNjN9.MNQpcApy-nuLTGh-OMwmcNEh7sQcVwWBKfo9E8qwmdA",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"titulo\": \"Aprender JavaScript\",\n  \"descricao\": \"Começar estudando NodeJS e depois avançar para ReactJS\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
