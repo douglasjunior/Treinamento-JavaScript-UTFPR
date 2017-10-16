@@ -1,9 +1,11 @@
 import express from 'express';
 import moment from 'moment';
 import bcrypt from 'bcryptjs';
-import { generateToken, checkTokenMiddleware } from '../utils/jwt'
 
-import { Usuario } from '../models';
+import { generateToken, checkTokenMiddleware } from '../utils/jwt'
+import models from '../models';
+
+const { Usuario, Tarefa } = models;
 
 const router = express.Router();
 
@@ -13,7 +15,7 @@ module.exports = {
 };
 
 const DATE_FORMAT = 'YYYY-MM-DD';
-const SALT_ROUNDS = 12;
+const SALT_ROUNDS = 12; // quanto mais rounds, mais seguro e mais lento para criptografar a senha
 
 /**
  * Cadastro de usuário
@@ -28,7 +30,6 @@ router.post('/', (request, response) => {
 
     Usuario.create(usuario)
         .then((_usuario) => {
-            console.log('Usuário inserido com sucesso');
             response.status(201).json(_usuario.toResponse());
         }).catch(ex => {
             console.error(ex);
@@ -51,17 +52,21 @@ router.get('/:usuarioId',
             return;
         }
 
-        Usuario.findById(usuarioId)
-            .then(usuario => {
-                if (usuario) {
-                    response.status(200).json(usuario.toResponse());
-                } else {
-                    response.status(404).send('Usuário não encontrado.');
-                }
-            }).catch(ex => {
-                console.error(ex);
-                response.status(400).send('Não foi possível consultar o usuário.');
-            });
+        Usuario.findById(usuarioId, {
+            include: [{
+                model: Tarefa,
+                required: false // true = inner join, false = left join
+            }]
+        }).then(usuario => {
+            if (usuario) {
+                response.status(200).json(usuario.toResponse());
+            } else {
+                response.status(404).send('Usuário não encontrado.');
+            }
+        }).catch(ex => {
+            console.error(ex);
+            response.status(400).send('Não foi possível consultar o usuário.');
+        });
     });
 
 /**
@@ -90,9 +95,9 @@ router.put('/:usuarioId',
                 } else {
                     response.status(404).send('Usuário não encontrado.');
                 }
-            }).then(usuario => {
-                if (usuario) {
-                    response.status(200).json(usuario.toResponse());
+            }).then(usuarioAtualizado => {
+                if (usuarioAtualizado) {
+                    response.status(200).json(usuarioAtualizado.toResponse());
                 }
             }).catch(ex => {
                 console.error(ex);
