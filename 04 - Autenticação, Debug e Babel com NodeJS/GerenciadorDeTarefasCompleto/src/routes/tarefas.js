@@ -43,7 +43,10 @@ router.get('/:tarefaId',
         Tarefa.findById(tarefaId, {
             where: {
                 usuarioId: usuarioId
-            }
+            },
+            include: [{
+                model: Usuario
+            }]
         }).then(tarefa => {
             if (tarefa) {
                 response.status(200).json(tarefa);
@@ -94,7 +97,7 @@ router.delete('/:tarefaId',
             where: {
                 id: tarefaId,
                 usuarioId: usuarioId,
-            }
+            },
         }).then(registrosAfetados => {
             if (registrosAfetados > 0) {
                 response.status(204).send();
@@ -116,7 +119,7 @@ router.get('/',
         let where = {
             usuarioId: usuarioId,
         }
-        
+
         if (titulo) {
             where.titulo = {
                 $like: '%' + titulo + '%'

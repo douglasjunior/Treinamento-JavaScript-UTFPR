@@ -26,7 +26,14 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.BLOB,
         },
         nascimento: DataTypes.DATEONLY,
-    });
+    }, {
+            defaultScope: {
+                attributes: {
+                    exclude: ['senha']
+                }
+            },
+        }
+    );
 
     /**
      * @param {Object.<string, Sequelize.Model>} models
@@ -39,16 +46,6 @@ module.exports = function (sequelize, DataTypes) {
             onDelete: 'NO ACTION',
             onUpdate: 'NO ACTION',
         })
-    }
-
-    /**
-     * Converte o objeto gerenciando pelo sequelize em um objeto plano sem a propriedade 'senha'.
-     * @return {object} usuario
-     */
-    Usuario.prototype.toResponse = function () {
-        const values = this.get({ plain: true });
-        delete values.senha;
-        return values;
     }
 
     return Usuario;

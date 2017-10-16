@@ -43,12 +43,13 @@ export const checkToken = (token) => {
 /**
  * Gera o token de autenticação para o usuário.
  * 
- * @param {object} usuario Instância do usuário retornado do sequelize.
+ * @param {object} usuario objeto plano contendo os dados do usuário.
  * @return {string} Token de autenticação.
  */
 export const generateToken = (usuario) => {
-
-    let token = jwt.sign(usuario.toResponse(), SECRET_KEY, { encoding: 'UTF8' });
+    delete usuario.senha;
+    
+    let token = jwt.sign(usuario, SECRET_KEY, { encoding: 'UTF8' });
 
     return token;
 }

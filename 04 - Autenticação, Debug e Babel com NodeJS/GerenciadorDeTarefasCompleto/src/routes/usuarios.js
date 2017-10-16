@@ -30,7 +30,7 @@ router.post('/', (request, response) => {
 
     Usuario.create(usuario)
         .then((_usuario) => {
-            response.status(201).json(_usuario.toResponse());
+            response.status(201).json(_usuario);
         }).catch(ex => {
             console.error(ex);
             response.status(400).send('Não foi possível inserir o usuário.');
@@ -59,7 +59,7 @@ router.get('/:usuarioId',
             }]
         }).then(usuario => {
             if (usuario) {
-                response.status(200).json(usuario.toResponse());
+                response.status(200).json(usuario);
             } else {
                 response.status(404).send('Usuário não encontrado.');
             }
@@ -97,7 +97,7 @@ router.put('/:usuarioId',
                 }
             }).then(usuarioAtualizado => {
                 if (usuarioAtualizado) {
-                    response.status(200).json(usuarioAtualizado.toResponse());
+                    response.status(200).json(usuarioAtualizado);
                 }
             }).catch(ex => {
                 console.error(ex);
@@ -112,13 +112,16 @@ router.post('/login', async (request, response) => {
     const { email, senha } = request.body;
 
     Usuario.findOne({
+        attributes: {},
         where: {
             email: email
         }
     }).then(usuario => {
         if (usuario && bcrypt.compareSync(senha, usuario.senha.toString())) {
+            const _usuario = usuario.get({ plain: true });
+            delete _usuario.senha; // remove o atributo da senha do objeto
             response.status(200).json({
-                token: generateToken(usuario)
+                token: generateToken(_usuario)
             })
         } else {
             response.status(401).send('Email ou senha incorretos.');
