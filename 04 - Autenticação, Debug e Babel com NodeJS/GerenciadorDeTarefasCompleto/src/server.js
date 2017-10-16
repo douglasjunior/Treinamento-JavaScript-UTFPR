@@ -1,10 +1,8 @@
 import app from '../src/app';
-import Debug from 'debug';
 import http from 'http';
+const debug = require('debug')('http:server');
 
 import { sequelize } from './models';
-
-const debug = Debug('http:server');
 
 /**
  * Get port from environment and store in Express.

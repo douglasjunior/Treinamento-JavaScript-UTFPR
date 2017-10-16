@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Sequelize from 'sequelize';
+const debug = require('debug')('http:models');
 
 const basename = path.basename(module.filename);
 const env = process.env.NODE_ENV || 'development';
@@ -28,13 +29,15 @@ fs.readdirSync(__dirname)
     })
     .forEach((file) => {
         const fileName = file.slice(0, -3);
+        debug('Loading: ' + fileName);
         const model = sequelize.import(path.join(__dirname, file));
         db[fileName] = model;
     });
 
 // Chama a função 'associate' de cada entidade para configurar os relacionamentos
-Object.keys(db).forEach(function (modelName) {
+Object.keys(db).forEach((modelName) => {
     if (db[modelName].associate) {
+        debug('Associating: ' + modelName);
         db[modelName].associate(db);
     }
 });
