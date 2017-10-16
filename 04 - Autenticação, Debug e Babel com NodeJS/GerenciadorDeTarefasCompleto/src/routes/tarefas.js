@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { checkTokenMiddleware } from '../utils/jwt'
+import { checkTokenMiddleware } from '../utils/JWT'
 import models, { sequelize } from '../models';
 
 const { Usuario, Tarefa } = models;

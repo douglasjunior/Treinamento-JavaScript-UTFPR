@@ -29,7 +29,7 @@ module.exports = function (sequelize, DataTypes) {
     }, {
             defaultScope: {
                 attributes: {
-                    exclude: ['senha']
+                    exclude: ['senha'] // por padrão, exclui a senha do resultados das consultas
                 }
             },
         }
