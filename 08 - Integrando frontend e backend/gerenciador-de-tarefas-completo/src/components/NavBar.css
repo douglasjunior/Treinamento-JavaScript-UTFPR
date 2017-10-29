@@ -1,0 +1,48 @@
+#navbar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 40px;
+    background: #6d7fcc;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+#navbar-title {
+    display: none;
+    margin: 0px 0px 0px 10px;
+    flex: 1
+}
+
+#navbar.active #navbar-title {
+    display: inline;
+}
+
+#sidebarCollapse {
+    background-color: transparent;
+    border-color: #fff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#sidebarCollapse:focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+@media (max-width: 768px) {
+    #sidebarCollapse span {
+        display: none;
+    }
+    #navbar-title {
+        display: inline
+    }
+}
