@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { Route, Link } from 'react-router-dom';
 
+import { CSSTransitionGroup } from 'react-transition-group';
+
 const TAREFAS = [{
     id: 1,
     titulo: 'Tarefa 1',
@@ -44,6 +46,30 @@ const TAREFAS = [{
 
 export default class Tarefas extends Component {
 
+    renderDetalhes = () => {
+        const { location } = this.props;
+        return (
+            <Route
+                location={location}
+                key={location.key}
+                path="/tarefas/:tarefaId"
+                render={(props) => {
+                    const { tarefaId } = props.match.params;
+                    const tarefa = TAREFAS.find((tarefa) => {
+                        return tarefa.id === parseInt(tarefaId, 10);
+                    });
+                    if (!tarefa) return null;
+                    return (
+                        <div style={{ position: 'absolute', top: 0, left: 0 }}>
+                            <h3>Detalhes</h3>
+                            <h4>{tarefa.id}: {tarefa.titulo}</h4>
+                            <p>{tarefa.descricao}</p>
+                        </div>
+                    )
+                }} />
+        )
+    }
+
     render() {
         return (
             <div>
@@ -66,21 +92,14 @@ export default class Tarefas extends Component {
                             })}
                         </ul>
                     </div>
-                    <div style={{ width: '500px' }}>
-                        <h3>Detalhes</h3>
-                        <Route path="/tarefas/:tarefaId" render={(props) => {
-                            const { tarefaId } = props.match.params;
-                            const tarefa = TAREFAS.find((tarefa) => {
-                                return tarefa.id === parseInt(tarefaId, 10);
-                            });
-                            if (!tarefa) return null;
-                            return (
-                                <div>
-                                    <h4>{tarefa.id}: {tarefa.titulo}</h4>
-                                    <p>{tarefa.descricao}</p>
-                                </div>
-                            )
-                        }} />
+                    <div style={{ width: '500px', position: 'relative' }}>
+                        <CSSTransitionGroup
+                            transitionName="fade"
+                            transitionEnterTimeout={300}
+                            transitionLeaveTimeout={300}
+                        >
+                            {this.renderDetalhes()}
+                        </CSSTransitionGroup>
                     </div>
                 </div>
             </div>
