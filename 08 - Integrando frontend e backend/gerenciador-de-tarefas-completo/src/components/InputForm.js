@@ -81,7 +81,6 @@ export default class InputForm extends Component {
             <FormGroup row>
                 <Label for={id} sm={2}>{label}</Label>
                 {CustomInput}
-
             </FormGroup>
         )
     }
