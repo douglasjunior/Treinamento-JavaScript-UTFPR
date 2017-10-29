@@ -11,7 +11,7 @@ const SECRET_KEY = "chave secreta que assina e valida o token de autenticação"
  * @param {next} next
  */
 export const checkTokenMiddleware = (req, res, next) => {
-    let token = req.headers["x-access-token"];
+    const token = req.headers["x-access-token"] || req.cookies["x-access-token"];
     checkToken(token)
         .then(decoded => {
             req.decodedToken = decoded;
