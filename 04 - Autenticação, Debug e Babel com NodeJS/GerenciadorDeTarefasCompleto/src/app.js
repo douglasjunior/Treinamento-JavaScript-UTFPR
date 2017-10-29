@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import expressValidator from 'express-validator';
 import path from 'path';
 import logger from 'morgan';
@@ -10,6 +11,7 @@ import loadRoutes from './routes/';
 
 const app = express();
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
