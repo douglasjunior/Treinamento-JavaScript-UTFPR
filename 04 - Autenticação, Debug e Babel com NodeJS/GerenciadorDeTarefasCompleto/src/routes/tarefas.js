@@ -22,10 +22,7 @@ const TAREFA_VALIDATOR = {
     },
     descricao: {
         in: 'body',
-        optional: true,
-        isLength: {
-            options: [{ min: 1, }],
-        },
+        optional: true
     },
 };
 
