@@ -16,7 +16,6 @@ export default class NavBar extends Component {
             <nav id="navbar" className={active ? "active" : null}>
                 <Button type="button" id="sidebarCollapse" onClick={toggleSideBar}>
                     <MdMenu />
-                    {' '}
                     <span>Menu</span>
                 </Button>
 
