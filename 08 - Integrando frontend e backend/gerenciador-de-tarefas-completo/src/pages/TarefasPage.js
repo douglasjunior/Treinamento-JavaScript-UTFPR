@@ -31,7 +31,7 @@ export default class TarefasPage extends Component {
         axiosMethod('/tarefas/concluida/' + tarefaId)
             .then(response => {
                 if (response.status === 204) {
-                    const tarefas = [...this.state.tarefas];
+                    const tarefas = this.state.tarefas;
                     const tarefa = tarefas.find(tarefa => tarefa.id === tarefaId);
                     tarefa.concluida = concluida;
                     this.setState({ tarefas });
@@ -46,7 +46,19 @@ export default class TarefasPage extends Component {
     }
 
     onExcluirClick = (tarefaId) => {
-
+        if (window.confirm(`Deseja excluir a tarefa ${tarefaId}?`)) {
+            axios.delete('/tarefas/' + tarefaId)
+                .then(response => {
+                    if (response.status === 204) {
+                        const tarefas = this.state.tarefas;
+                        const index = tarefas.findIndex(tarefa => tarefa.id === tarefaId);
+                        tarefas.splice(index, 1);
+                        this.setState({ tarefas });
+                    }
+                }).catch(ex => {
+                    console.error(ex);
+                })
+        }
     }
 
     render() {
