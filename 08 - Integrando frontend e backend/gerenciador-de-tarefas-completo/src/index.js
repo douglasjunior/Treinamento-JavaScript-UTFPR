@@ -10,6 +10,7 @@ import axios from 'axios';
 import { BrowserRouter } from 'react-router-dom';
 
 axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.withCredentials = true;
 
 /**
  * Componente que define o roteador usado no react-router

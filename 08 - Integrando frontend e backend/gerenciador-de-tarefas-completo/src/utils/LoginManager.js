@@ -1,6 +1,7 @@
+import jwtDecode from 'jwt-decode';
 import Cookies from 'universal-cookie';
-const cookies = new Cookies();
 
+const cookies = new Cookies();
 const TOKEN_COOKIE_NAME = 'x-access-token';
 
 export const saveToken = (token) => {
@@ -17,4 +18,8 @@ export const removeToken = () => {
 
 export const isLoggedIn = () => {
     return !!getToken();
+}
+
+export const getUsuario = () => {
+    return jwtDecode(getToken());
 }
