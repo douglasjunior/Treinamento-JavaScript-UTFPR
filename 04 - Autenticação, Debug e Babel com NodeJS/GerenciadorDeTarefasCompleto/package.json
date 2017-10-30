@@ -20,7 +20,8 @@
     "moment": "2.19.1",
     "morgan": "1.9.0",
     "mysql2": "1.4.2",
-    "sequelize": "4.13.17"
+    "sequelize": "4.13.17",
+    "url-join": "2.0.2"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",

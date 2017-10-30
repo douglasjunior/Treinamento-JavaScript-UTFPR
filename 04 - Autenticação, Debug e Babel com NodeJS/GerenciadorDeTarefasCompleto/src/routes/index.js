@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import urlJoin from 'url-join';
 import { Application } from 'express';
 const debug = require('debug')('http:routes');
 
@@ -17,8 +18,9 @@ const loadRoutes = (app, appPath) =>
         .forEach((file) => {
             const routeFile = path.join(__dirname, file);
             const route = require(routeFile).default || require(routeFile);
-            debug("Loading: " + path.join(appPath, route.path));
-            app.use(path.join(appPath, route.path), route.router);
+            const routePath = urlJoin(appPath, route.path);
+            debug("Loading: " + routePath);
+            app.use(routePath, route.router);
         });
 
 export default loadRoutes;
