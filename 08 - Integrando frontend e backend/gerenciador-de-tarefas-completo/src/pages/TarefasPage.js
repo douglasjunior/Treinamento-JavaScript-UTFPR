@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 
 import axios from 'axios';
-import { Nav, NavItem, Button } from 'reactstrap';
+import {
+    Nav, NavItem, Button,
+    InputGroup, Input, InputGroupAddon,
+} from 'reactstrap';
 
 import TarefasTable from '../components/TarefasTable';
 import TarefaForm from '../components/TarefaForm';
@@ -11,16 +14,23 @@ export default class TarefasPage extends Component {
     state = { tarefas: [], showForm: false, tarefaSelecionada: null };
 
     componentDidMount() {
-        axios.get('/tarefas')
-            .then(response => {
-                if (response.status === 200) {
-                    this.setState({
-                        tarefas: response.data
-                    })
-                }
-            }).catch(ex => {
-                console.error(ex, ex.response);
-            })
+        this.getTarefas();
+    }
+
+    getTarefas = (busca = '') => {
+        axios.get('/tarefas', {
+            params: {
+                titulo: busca
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                this.setState({
+                    tarefas: response.data
+                })
+            }
+        }).catch(ex => {
+            console.error(ex, ex.response);
+        })
     }
 
     onConcluidaChange = (tarefaId, concluida) => {
@@ -105,6 +115,14 @@ export default class TarefasPage extends Component {
         this.setState({ showForm: false, tarefaSelecionada: null })
     }
 
+    onBuscaChange = (event) => {
+        clearTimeout(this.buscaTimeout);
+        const value = event.target.value;
+        this.buscaTimeout = setTimeout(() => {
+            this.getTarefas(value);
+        }, 1000);
+    }
+
     render() {
         const { tarefas, showForm, tarefaSelecionada } = this.state;
         return (
@@ -112,6 +130,12 @@ export default class TarefasPage extends Component {
                 <h2>Tarefas</h2>
 
                 <Nav pills style={{ backgroundColor: '#c0ccff', padding: 8, }}>
+                    <NavItem style={{ flex: 1, marginRight: 8 }}>
+                        <InputGroup>
+                            <InputGroupAddon>Busca</InputGroupAddon>
+                            <Input placeholder="Título da tarefa" onChange={this.onBuscaChange} />
+                        </InputGroup>
+                    </NavItem>
                     <NavItem>
                         <Button color='success' onClick={this.onNovaTarefaClick} >Nova Tarefa</Button>
                     </NavItem>

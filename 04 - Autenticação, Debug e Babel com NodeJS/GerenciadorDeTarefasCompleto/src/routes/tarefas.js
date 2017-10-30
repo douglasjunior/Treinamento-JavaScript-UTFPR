@@ -154,8 +154,7 @@ router.get('/',
     createValidator({
         titulo: {
             in: 'query',
-            optional: true,
-            notEmpty: true,
+            optional: true
         }
     }),
     checkTokenMiddleware,
