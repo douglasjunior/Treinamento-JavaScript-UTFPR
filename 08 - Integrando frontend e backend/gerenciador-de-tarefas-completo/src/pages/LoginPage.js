@@ -69,7 +69,7 @@ export default class LoginPage extends Component {
         const { email, senha } = this.state;
 
         return (
-            <Container>
+            <Container style={{ maxWidth: 580 }}>
                 <h2>Login</h2>
 
                 <Form onSubmit={this.onFormSubmit} style={{ marginTop: 20 }}>

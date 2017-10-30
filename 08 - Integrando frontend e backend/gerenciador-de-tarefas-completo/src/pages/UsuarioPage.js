@@ -78,16 +78,19 @@ export default class UsuarioPage extends Component {
     render() {
         const { nome, email, senha, nascimento } = this.state;
         return (
-            <Container>
+            <Container style={{ maxWidth: 580 }}>
                 <h2>Cadastro de Usuários</h2>
+
                 <Form onSubmit={this.onFormSubmit} style={{ marginTop: 20 }}>
                     <InputForm label="Nome" id="nome" ref="nome" value={nome} onChange={this.onInputChange} required={true}
                         validator={value => !!value && value.length >= 3} errorMessage="O nome é obrigatório." />
                     <InputForm label="E-mail" id="email" ref="email" value={email} onChange={this.onInputChange} required={true}
                         validator={validateEmail} errorMessage="Informe um e-mail válido." />
-                    <InputForm label="Senha" id="senha" ref="senha" value={senha} onChange={this.onInputChange} type="password" required={true}
+                    <InputForm label="Senha" id="senha" ref="senha" value={senha} onChange={this.onInputChange} required={true}
+                        type="password"
                         validator={validateSenha} errorMessage="A senha deve conter no mínimo 6 e no máximo 8 caracteres." />
-                    <InputForm label="Nascimento" id="nascimento" ref="nascimento" value={nascimento} onChange={this.onInputChange} type="date" dateFormat={DATE_FORMAT} required={true}
+                    <InputForm label="Nascimento" id="nascimento" ref="nascimento" value={nascimento} onChange={this.onInputChange} required={true}
+                        type="date" dateFormat={DATE_FORMAT}
                         validator={this.validateNascimento} errorMessage="Informe a data de nascimento no formato dd/mm/aaaa." />
                     <FormGroup row>
                         <Col sm={{ size: 10, offset: 2 }}>
