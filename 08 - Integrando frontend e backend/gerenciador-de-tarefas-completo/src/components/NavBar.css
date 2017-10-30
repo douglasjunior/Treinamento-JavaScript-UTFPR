@@ -14,7 +14,7 @@
 
 #navbar-title {
     display: none;
-    margin: 0px 0px 0px 10px;
+    margin: 0px 0px 0px 16px;
     flex: 1
 }
 
@@ -28,6 +28,10 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+#sidebarCollapse span {
+    margin-left: 4px
 }
 
 #sidebarCollapse:focus {
