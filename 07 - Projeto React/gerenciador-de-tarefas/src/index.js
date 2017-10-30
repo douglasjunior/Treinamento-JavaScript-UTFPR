@@ -8,7 +8,7 @@ import registerServiceWorker from './registerServiceWorker';
 import axios from 'axios';
 import { BrowserRouter } from 'react-router-dom';
 
-axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "http://localhost:3001/api/";
 
 const Index = () => (
     <BrowserRouter>

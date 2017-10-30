@@ -120,7 +120,7 @@ export default class TarefasPage extends Component {
         const value = event.target.value;
         this.buscaTimeout = setTimeout(() => {
             this.getTarefas(value);
-        }, 1000);
+        }, 500);
     }
 
     render() {
@@ -140,7 +140,6 @@ export default class TarefasPage extends Component {
                         <Button color='success' onClick={this.onNovaTarefaClick} >Nova Tarefa</Button>
                     </NavItem>
                 </Nav>
-
 
                 <TarefasTable tarefas={tarefas}
                     onConcluidaChange={this.onConcluidaChange}

@@ -32,14 +32,14 @@ export default class LoginPage extends Component {
             console.log(response.status);
             if (response.status === 200) {
                 saveToken(response.data.token);
-                this.props.history.push('/login');
+                this.props.history.push('/');
             } else {
                 alert('Não foi efetuar login, verifique os dados informados e tente novamente.');
             }
         }).catch(ex => {
             console.error(ex);
             console.error('response', ex.response)
-            if (ex.response.status === 422) {
+            if (ex.response.status === 401) {
                 alert('Usuário ou senha incorretos.');
             } else if (ex.response.status === 422) {
                 alert('Não foi efetuar login, verifique os dados informados e tente novamente.');

@@ -14,8 +14,10 @@ export default (props) => {
             <td>{moment(tarefa.createdAt).format('DD/MM/YYYY [às] HH:mm')}</td>
             <td>
                 <ButtonGroup size="sm">
-                    <Button color={!tarefa.concluida ? 'primary' : 'secondary'} onClick={() => onConcluidaChange(tarefa.id, false)}>Pendente</Button>
-                    <Button color={tarefa.concluida ? 'primary' : 'secondary'} onClick={() => onConcluidaChange(tarefa.id, true)}>Concluída</Button>
+                    <Button color={!tarefa.concluida ? 'primary' : 'secondary'}
+                        onClick={() => onConcluidaChange(tarefa.id, false)}>Pendente</Button>
+                    <Button color={tarefa.concluida ? 'primary' : 'secondary'}
+                        onClick={() => onConcluidaChange(tarefa.id, true)}>Concluída</Button>
                 </ButtonGroup>
             </td>
             <td>
