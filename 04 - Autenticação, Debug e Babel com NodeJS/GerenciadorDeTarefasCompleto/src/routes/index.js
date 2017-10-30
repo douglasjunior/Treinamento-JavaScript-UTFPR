@@ -9,7 +9,7 @@ const basename = path.basename(module.filename);
  * Faz a leutira automática de todos os arquivos de dentro do diretório 'routes'.
  * @param {Application} app 
  */
-const loadRoutes = (app) =>
+const loadRoutes = (app, appPath) =>
     fs.readdirSync(__dirname)
         .filter((file) => {
             return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
@@ -17,8 +17,8 @@ const loadRoutes = (app) =>
         .forEach((file) => {
             const routeFile = path.join(__dirname, file);
             const route = require(routeFile).default || require(routeFile);
-            debug("Loading: " + route.path);
-            app.use(route.path, route.router);
+            debug("Loading: " + path.join(appPath, route.path));
+            app.use(path.join(appPath, route.path), route.router);
         });
 
 export default loadRoutes;

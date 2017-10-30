@@ -215,8 +215,7 @@ router.put('/concluida/:tarefaId',
 const concluirTarefa = (tarefaId, concluida, response) => {
     return Tarefa.update({
         concluida: concluida,
-    },
-        {
+    }, {
             where: {
                 id: tarefaId,
             },
