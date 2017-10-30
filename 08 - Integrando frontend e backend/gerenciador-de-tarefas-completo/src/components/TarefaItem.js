@@ -8,7 +8,7 @@ import {
 export default (props) => {
     const { tarefa, onConcluidaChange, onExcluirClick, onEditarClick } = props;
     return (
-        <tr key={tarefa.id}>
+        <tr>
             <th scope="row">{tarefa.id}</th>
             <td>{tarefa.titulo}</td>
             <td>{moment(tarefa.createdAt).format('DD/MM/YYYY [às] HH:mm')}</td>

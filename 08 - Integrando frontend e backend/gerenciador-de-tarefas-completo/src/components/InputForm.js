@@ -39,9 +39,9 @@ export default class InputForm extends Component {
         if (this.state.valid !== null)
             return this.state.valid;
 
-        const { validator } = this.props;
+        const { validator, value } = this.props;
         let valid = false;
-        if (validator) valid = !!validator(this.input.value);
+        if (validator) valid = !!validator(value);
         this.setState({ valid });
 
         return valid;
@@ -56,7 +56,6 @@ export default class InputForm extends Component {
             CustomInput = (
                 <Col sm={10}>
                     <DatePicker
-                        ref={ref => this.input = ref}
                         customInput={<Input id={id} valid={valid} style={{ display: 'inline' }} {...others} />}
                         dateFormat={dateFormat}
                         locale="pt-br"
@@ -71,7 +70,7 @@ export default class InputForm extends Component {
         } else {
             CustomInput = (
                 <Col sm={10}>
-                    <Input ref={ref => this.input = ref} id={id} valid={valid} value={value} type={type} {...others} onChange={this.onChange} />
+                    <Input id={id} valid={valid} value={value} type={type} {...others} onChange={this.onChange} />
                     <FormFeedback>{errorMessage}</FormFeedback>
                 </Col>
             )

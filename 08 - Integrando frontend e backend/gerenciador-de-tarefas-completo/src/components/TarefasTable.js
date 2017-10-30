@@ -8,7 +8,7 @@ export default class TarefasTable extends Component {
 
     renderTarefa = (tarefa, index) => {
         return (
-            <TarefaItem tarefa={tarefa} {...this.props} />
+            <TarefaItem key={tarefa.id} tarefa={tarefa} {...this.props} />
         )
     }
 
