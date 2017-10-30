@@ -71,6 +71,15 @@ router.post('/',
                 response.status(201).json(_usuario);
             }).catch(ex => {
                 console.error(ex);
+                if (ex.errors.length) {
+                    if (ex.errors[0].type === 'unique violation') {
+                        response.status(412).json({
+                            type: 'unique',
+                            field: 'email'
+                        });
+                        return;
+                    }
+                }
                 response.status(400).send('Não foi possível inserir o usuário.');
             });
     });

@@ -50,6 +50,9 @@ export default class UsuarioPage extends Component {
             console.error('response', ex.response)
             if (ex.response.status === 422) {
                 alert('Não foi possível cadastrar o usuário, verifique os dados informados e tente novamente.');
+            } else if (ex.response.status === 412) {
+                if (ex.response.data.type === 'unique')
+                    alert('E-mail já cadastrado na base de dados.');
             } else {
                 alert('Não foi possível cadastrar o usuário, tente novamente mais tarde.');
             }
