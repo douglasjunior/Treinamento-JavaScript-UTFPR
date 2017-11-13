@@ -39,7 +39,7 @@ export default (props) => {
 
             <View style={{ padding: 16 }} >
                 <Button title="ABRIR FOTO"
-                    onPress={() => Linking.openURL('https://play.google.com/store/apps/details?id=com.hyperkani.airhockey')} />
+                    onPress={() => Linking.openURL(photo.url)} />
             </View>
 
         </View>
