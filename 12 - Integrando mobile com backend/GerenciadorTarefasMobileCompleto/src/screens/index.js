@@ -4,6 +4,7 @@ import { View, Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import SplashScreen from './SplashScreen';
+import BemVindoScreen from './BemVindoScreen';
 import LoginScreen from './LoginScreen';
 import UsuarioScreen from './UsuarioScreen';
 import HomeScreen from './HomeScreen';
@@ -11,6 +12,12 @@ import TarefaScreen from './TarefaScreen';
 import TarefasScreen from './TarefasScreen';
 
 const HomeStackNavigator = StackNavigator({
+    BemVindoScreen: {
+        screen: BemVindoScreen,
+        navigationOptions: {
+            header: () => null,
+        }
+    },
     SplashScreen: {
         screen: SplashScreen
     },
