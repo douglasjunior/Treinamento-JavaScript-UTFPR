@@ -61,6 +61,8 @@ export default class InputForm extends Component {
                         locale="pt-br"
                         selected={value}
                         useWeekdaysShort={true}
+                        showMonthDropdown={true}
+                        showYearDropdown={true}
                         isClearable={true}
                         onChangeRaw={this.onChange}
                         onChange={this.onDateChange} />
