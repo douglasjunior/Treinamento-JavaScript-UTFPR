@@ -13,6 +13,7 @@ buildscript {
 }
 
 allprojects {
+    buildDir = "${System.properties['java.io.tmpdir']}/${rootProject.name}/${project.name}"
     repositories {
         mavenLocal()
         jcenter()
