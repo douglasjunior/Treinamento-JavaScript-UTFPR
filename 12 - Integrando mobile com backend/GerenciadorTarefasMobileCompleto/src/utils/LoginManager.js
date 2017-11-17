@@ -16,9 +16,11 @@ export const removeToken = async () => {
 }
 
 export const isLoggedIn = async () => {
-    return !! await getToken();
+    const token = await getToken();
+    return !!token;
 }
 
 export const getUsuario = async () => {
-    return jwtDecode(await getToken());
+    const token = await getToken();
+    return token ? jwtDecode(token) : null;
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, Platform } from 'react-native';
+import { View, Text, Platform, TouchableOpacity } from 'react-native';
 
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, DrawerNavigator, withNavigation } from 'react-navigation';
 
 import SplashScreen from './SplashScreen';
 import BemVindoScreen from './BemVindoScreen';
@@ -11,6 +11,8 @@ import HomeScreen from './HomeScreen';
 import TarefaScreen from './TarefaScreen';
 import TarefasScreen from './TarefasScreen';
 
+import Icon from '../components/Icon';
+import Drawer from '../components/Drawer';
 import Colors from '../values/Colors';
 
 const defaultNavigationOptions = Platform.select({
@@ -25,6 +27,17 @@ const defaultNavigationOptions = Platform.select({
             backgroundColor: Colors.primary
         },
     }
+});
+defaultNavigationOptions.headerBackTitle = "Voltar";
+defaultNavigationOptions.drawerLockMode = 'locked-closed';
+
+const MenuButton = withNavigation((props) => {
+    const { navigation } = props;
+    return (
+        <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+            <Icon family="MaterialIcons" name="menu" color={defaultNavigationOptions.headerTintColor} style={{ padding: 16 }} />
+        </TouchableOpacity>
+    )
 })
 
 const HomeStackNavigator = StackNavigator({
@@ -32,12 +45,14 @@ const HomeStackNavigator = StackNavigator({
         screen: SplashScreen,
         navigationOptions: {
             header: () => null,
+            ...defaultNavigationOptions
         }
     },
     BemVindoScreen: {
         screen: BemVindoScreen,
         navigationOptions: {
             header: () => null,
+            ...defaultNavigationOptions
         }
     },
     LoginScreen: {
@@ -57,8 +72,10 @@ const HomeStackNavigator = StackNavigator({
     HomeScreen: {
         screen: HomeScreen,
         navigationOptions: {
-            title: "Gerenc. Tarefas",
-            ...defaultNavigationOptions
+            title: "Home",
+            headerLeft: <MenuButton />,
+            ...defaultNavigationOptions,
+            drawerLockMode: 'unlocked',
         }
     },
     TarefaScreen: {
@@ -71,16 +88,27 @@ const HomeStackNavigator = StackNavigator({
     TarefasScreen: {
         screen: TarefasScreen,
         navigationOptions: {
-            title: "Suas Tarefas",
+            title: "Suas tarefas",
             ...defaultNavigationOptions
         }
     },
 });
 
+const HomeDrawerNavigator = DrawerNavigator(
+    {
+        HomeStack: {
+            screen: HomeStackNavigator
+        }
+    },
+    {
+        contentComponent: Drawer,
+    }
+)
+
 export default class AppNavigator extends Component {
     render() {
         return (
-            <HomeStackNavigator />
+            <HomeDrawerNavigator />
         )
     }
 }

@@ -12,7 +12,7 @@ export default class SplashScreen extends Component {
 
         let routeName;
         if (isLogged) {
-            routeName = "HomeTabs";
+            routeName = "HomeScreen";
         } else {
             routeName = "BemVindoScreen";
         }

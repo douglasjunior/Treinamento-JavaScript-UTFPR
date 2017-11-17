@@ -53,28 +53,22 @@ export default class UsuarioScreen extends Component {
             if (ex.response) {
                 if (ex.response.status === 422) {
                     alert('Não foi possível cadastrar o usuário, verifique os dados informados e tente novamente.');
+                    return;
                 } else if (ex.response.status === 412) {
-                    if (ex.response.data.type === 'unique')
+                    if (ex.response.data.type === 'unique') {
                         alert('E-mail já cadastrado na base de dados.');
+                        return;
+                    }
                 }
-                return;
             }
             alert('Não foi possível cadastrar o usuário, tente novamente mais tarde.');
         })
-    }
-
-    onCancelarClick = (event) => {
-        this.props.history.push('/login');
     }
 
     onInputChange = (id, value) => {
         const state = {};
         state[id] = value;
         this.setState(state);
-    }
-
-    onNascimentoChange = (date) => {
-        this.setState({ nascimento: date });
     }
 
     validateNascimento = (value) => {
