@@ -31,7 +31,6 @@ export default class LoginScreen extends Component {
         axios.post("/usuarios/login", {
             email, senha
         }).then(async response => {
-            console.log(response.status);
             if (response.status === 200) {
                 await saveToken(response.data.token);
                 this.goToHome()

@@ -39,7 +39,6 @@ export default class UsuarioScreen extends Component {
             senha,
             nascimento: moment(nascimento, DATE_FORMAT).format("YYYY-MM-DD")
         }).then(response => {
-            console.log(response.status);
             if (response.status === 201) {
                 alert('Usuário cadastrado com sucesso!');
                 navigation.goBack(null);
