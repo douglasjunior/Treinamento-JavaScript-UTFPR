@@ -41,6 +41,13 @@ const MenuButton = withNavigation((props) => {
 })
 
 const HomeStackNavigator = StackNavigator({
+    TarefasScreen: {
+        screen: TarefasScreen,
+        navigationOptions: {
+            title: "Suas tarefas",
+            ...defaultNavigationOptions
+        }
+    },
     SplashScreen: {
         screen: SplashScreen,
         navigationOptions: {
@@ -85,13 +92,7 @@ const HomeStackNavigator = StackNavigator({
             ...defaultNavigationOptions
         }
     },
-    TarefasScreen: {
-        screen: TarefasScreen,
-        navigationOptions: {
-            title: "Suas tarefas",
-            ...defaultNavigationOptions
-        }
-    },
+
 });
 
 const HomeDrawerNavigator = DrawerNavigator(

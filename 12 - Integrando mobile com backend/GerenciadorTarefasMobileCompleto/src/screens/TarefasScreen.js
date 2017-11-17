@@ -1,12 +1,120 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import {
+    View, Text, FlatList,
+    Switch, Platform
+} from 'react-native';
+const { OS } = Platform;
+
+import moment from 'moment';
+import axios from 'axios';
+
+import { SearchBar, Card, Divider } from 'react-native-elements';
+
+import Colors from '../values/Colors';
+
+const SwitchStyle = OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : undefined;
+
+const TarefaItem = ({ tarefa, onConcluidaChange }) => {
+    return (
+        <Card containerStyle={{ padding: 0 }}>
+            <View style={{ paddingHorizontal: 16, paddingVertical: 8, flexDirection: 'row' }}>
+                <Text style={{ color: Colors.textSecondaryDark, fontSize: 14, flex: 1 }}
+                >#{tarefa.id}</Text>
+                <Text style={{ color: Colors.textSecondaryDark, fontSize: 14, }}
+                >{moment(tarefa.createdAt).format('DD/MM/YYYY [às] HH:mm')}</Text>
+            </View>
+
+            <Divider />
+
+            <View style={{ paddingHorizontal: 24, paddingVertical: 8 }}>
+                <Text
+                    style={{ color: Colors.textPrimaryDark, fontSize: 18 }}
+                >{tarefa.titulo}</Text>
+            </View>
+
+            <Divider />
+
+            <View style={{ paddingHorizontal: 16, paddingVertical: 8, flexDirection: 'row', alignItems: 'center' }}>
+                <Text
+                    style={{ color: Colors.textSecondaryDark, fontSize: 14, flex: 1 }}
+                >{tarefa.concluida ? "Concluída" : "Pendente"}</Text>
+                <Switch value={tarefa.concluida} style={SwitchStyle} onValueChange={value => onConcluidaChange(tarefa.id, value)} />
+            </View>
+        </Card>
+    )
+}
 
 export default class TarefasScreen extends Component {
 
-    render() {
+    state = { tarefas: [], };
+
+    componentDidMount() {
+        this.getTarefas();
+    }
+
+    getTarefas = (busca = '') => {
+        axios.get('/tarefas', {
+            params: {
+                titulo: busca
+            }
+        }).then(response => {
+            this.setState({
+                tarefas: response.data
+            })
+        }).catch(ex => {
+            console.warn(ex);
+            console.warn(ex.response);
+        })
+    }
+
+    onBuscaChange = (text) => {
+        clearTimeout(this.buscaTimeout);
+        this.buscaTimeout = setTimeout(() => {
+            this.getTarefas(text);
+        }, 500);
+    }
+
+    onConcluidaChange = (tarefaId, concluida) => {
+        let axiosMethod;
+        if (concluida) {
+            axiosMethod = axios.put('/tarefas/concluida/' + tarefaId);
+        } else {
+            axiosMethod = axios.delete('/tarefas/concluida/' + tarefaId);
+        }
+        axiosMethod.then(response => {
+            if (response.status === 204) {
+                const tarefas = [...this.state.tarefas ];
+                const tarefa = tarefas.find(tarefa => tarefa.id === tarefaId);
+                tarefa.concluida = concluida;
+                this.setState({ tarefas });
+            }
+        }).catch(ex => {
+            console.warn(ex, ex.response);
+        })
+    }
+
+    renderItem = ({ item, index }) => {
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text>Tarefas Screen</Text>
+            <TarefaItem tarefa={item} onConcluidaChange={this.onConcluidaChange} />
+        )
+    }
+
+    render() {
+        const { tarefas } = this.state;
+        return (
+            <View style={{ flex: 1, }}>
+                <SearchBar lightTheme={true} round={true}
+                    containerStyle={{ width: '100%', }}
+                    icon={{ size: 18, style: { paddingTop: 5 } }}
+                    placeholder="Busca por título"
+                    inputStyle={{ color: Colors.textPrimaryDark, fontSize: 18, height: 40, padding: 0, }}
+                    onChangeText={this.onBuscaChange} />
+
+                <FlatList
+                    data={tarefas}
+                    renderItem={this.renderItem}
+                    keyExtractor={tarefa => tarefa.id}
+                />
             </View>
         )
     }
