@@ -40,12 +40,22 @@ const MenuButton = withNavigation((props) => {
     )
 })
 
+const AddButton = withNavigation((props) => {
+    const { navigation } = props;
+    return (
+        <TouchableOpacity onPress={() => navigation.navigate('TarefaScreen', { tarefa: {}, onRefresh: () => null })}>
+            <Icon family="MaterialIcons" name="add" color={defaultNavigationOptions.headerTintColor} style={{ padding: 16 }} />
+        </TouchableOpacity>
+    )
+})
+
 const HomeStackNavigator = StackNavigator({
     TarefasScreen: {
         screen: TarefasScreen,
         navigationOptions: {
             title: "Suas tarefas",
-            ...defaultNavigationOptions
+            ...defaultNavigationOptions,
+            headerRight: <AddButton />,
         }
     },
     SplashScreen: {

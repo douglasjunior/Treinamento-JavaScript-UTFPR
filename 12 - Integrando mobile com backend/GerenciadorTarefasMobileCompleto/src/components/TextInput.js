@@ -43,7 +43,7 @@ class TextInput extends PureComponent {
     render() {
         const { label, id, errorMessage, type, dateFormat, validator, value,
             required, onChange, editable, secureTextEntry, keyboardType, autoCapitalize,
-            ...others } = this.props;
+            style, multiline, numberOfLines, ...others } = this.props;
         const { valid } = this.state;
 
         const borderColor = valid === false ? 'red' : Colors.accent;
@@ -69,6 +69,7 @@ class TextInput extends PureComponent {
                             height: 45, paddingLeft: 15,
                             borderRadius: 2, backgroundColor: "#fff",
                             borderColor: borderColor,
+                            ...style
                         },
                         disabled: {
                             backgroundColor: "#fff", height: 45, borderRadius: 2,
@@ -97,19 +98,17 @@ class TextInput extends PureComponent {
         } else {
             CustomInput = (
                 <TI ref="TextInput"
-                    secureTextEntry={secureTextEntry}
-                    underlineColorAndroid={Colors.transparent}
-                    placeholder={label}
-                    placeholderTextColor={Colors.textHintDark}
-                    value={value}
-                    editable={editable}
-                    onChangeText={this.onChange}
-                    autoCapitalize={autoCapitalize}
-                    keyboardType={keyboardType}
+                    secureTextEntry={secureTextEntry} underlineColorAndroid={Colors.transparent}
+                    placeholder={label} placeholderTextColor={Colors.textHintDark}
+                    value={value} editable={editable}
+                    onChangeText={this.onChange} autoCapitalize={autoCapitalize}
+                    keyboardType={keyboardType} multiline={multiline}
+                    numberOfLines={numberOfLines}
                     style={{
-                        backgroundColor: '#fff', height: 45, width: '100%', paddingLeft: 16,
+                        backgroundColor: '#fff', minHeight: 45, width: '100%', paddingLeft: 16,
                         fontSize: 18, color: Colors.textPrimaryDark,
                         borderColor: borderColor, borderWidth: 1, borderRadius: 2,
+                        ...style
                     }} />
             )
         }
