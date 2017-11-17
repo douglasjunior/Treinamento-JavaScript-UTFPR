@@ -1,13 +1,35 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+
+import { NavigationActions } from 'react-navigation';
+
+import { isLoggedIn } from '../utils/LoginManager';
 
 export default class SplashScreen extends Component {
 
+    async componentWillMount() {
+        const isLogged = await isLoggedIn();
+
+        let routeName;
+        if (isLogged) {
+            routeName = "HomeTabs";
+        } else {
+            routeName = "BemVindoScreen";
+        }
+
+        const resetAction = NavigationActions.reset({
+            index: 0,
+            actions: [
+                NavigationActions.navigate({ routeName: routeName })
+            ]
+        })
+
+        this.props.navigation.dispatch(resetAction);
+    }
+
     render() {
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text>Splash Screen</Text>
-            </View>
+            <View />
         )
     }
 }

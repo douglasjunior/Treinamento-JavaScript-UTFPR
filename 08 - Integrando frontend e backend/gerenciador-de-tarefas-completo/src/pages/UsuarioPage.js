@@ -14,7 +14,7 @@ import { validateEmail, validateSenha, checkFormIsValid } from '../utils/Validat
 const DATE_FORMAT = 'DD/MM/YYYY';
 
 export default class UsuarioPage extends Component {
-
+    
     state = {
         nome: '',
         email: '',

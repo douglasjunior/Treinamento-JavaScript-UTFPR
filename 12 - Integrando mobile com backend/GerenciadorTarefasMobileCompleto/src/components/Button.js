@@ -10,7 +10,8 @@ const Button = ({ title, textStyle, ...props }) => {
     return (
         <Btn
             title={OS === 'android' ? title.toUpperCase() : title}
-            textStyle={{ fontSize: 18, fontWeight: "400", ...textStyle }}
+            textStyle={{ fontSize: 18, fontWeight: "400",  ...textStyle }}
+            containerViewStyle={{ marginLeft: 0, marginRight: 0 }}
             {...props} />
     )
 }

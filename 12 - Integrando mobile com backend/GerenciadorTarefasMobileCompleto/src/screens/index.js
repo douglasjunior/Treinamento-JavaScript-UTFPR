@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Platform } from 'react-native';
 
 import { StackNavigator } from 'react-navigation';
 
@@ -11,30 +11,69 @@ import HomeScreen from './HomeScreen';
 import TarefaScreen from './TarefaScreen';
 import TarefasScreen from './TarefasScreen';
 
+import Colors from '../values/Colors';
+
+const defaultNavigationOptions = Platform.select({
+    ios: {
+        headerTintColor: Colors.primary,
+        headerTitleStyle: {
+            color: Colors.textPrimaryDark,
+        }
+    }, android: {
+        headerTintColor: '#fff',
+        headerStyle: {
+            backgroundColor: Colors.primary
+        },
+    }
+})
+
 const HomeStackNavigator = StackNavigator({
+    SplashScreen: {
+        screen: SplashScreen,
+        navigationOptions: {
+            header: () => null,
+        }
+    },
     BemVindoScreen: {
         screen: BemVindoScreen,
         navigationOptions: {
             header: () => null,
         }
     },
-    SplashScreen: {
-        screen: SplashScreen
-    },
     LoginScreen: {
-        screen: LoginScreen
+        screen: LoginScreen,
+        navigationOptions: {
+            title: "Entrar",
+            ...defaultNavigationOptions
+        }
     },
     UsuarioScreen: {
-        screen: UsuarioScreen
+        screen: UsuarioScreen,
+        navigationOptions: {
+            title: "Criar conta",
+            ...defaultNavigationOptions
+        }
     },
     HomeScreen: {
-        screen: HomeScreen
+        screen: HomeScreen,
+        navigationOptions: {
+            title: "Gerenc. Tarefas",
+            ...defaultNavigationOptions
+        }
     },
     TarefaScreen: {
-        screen: TarefaScreen
+        screen: TarefaScreen,
+        navigationOptions: {
+            title: "Tarefa",
+            ...defaultNavigationOptions
+        }
     },
     TarefasScreen: {
-        screen: TarefasScreen
+        screen: TarefasScreen,
+        navigationOptions: {
+            title: "Suas Tarefas",
+            ...defaultNavigationOptions
+        }
     },
 });
 
