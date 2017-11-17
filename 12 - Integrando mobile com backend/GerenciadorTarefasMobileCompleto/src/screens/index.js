@@ -50,14 +50,6 @@ const AddButton = withNavigation((props) => {
 })
 
 const HomeStackNavigator = StackNavigator({
-    TarefasScreen: {
-        screen: TarefasScreen,
-        navigationOptions: {
-            title: "Suas tarefas",
-            ...defaultNavigationOptions,
-            headerRight: <AddButton />,
-        }
-    },
     SplashScreen: {
         screen: SplashScreen,
         navigationOptions: {
@@ -95,6 +87,14 @@ const HomeStackNavigator = StackNavigator({
             drawerLockMode: 'unlocked',
         }
     },
+    TarefasScreen: {
+        screen: TarefasScreen,
+        navigationOptions: {
+            title: "Suas tarefas",
+            ...defaultNavigationOptions,
+            headerRight: <AddButton />,
+        }
+    },
     TarefaScreen: {
         screen: TarefaScreen,
         navigationOptions: {
@@ -102,7 +102,6 @@ const HomeStackNavigator = StackNavigator({
             ...defaultNavigationOptions
         }
     },
-
 });
 
 const HomeDrawerNavigator = DrawerNavigator(
