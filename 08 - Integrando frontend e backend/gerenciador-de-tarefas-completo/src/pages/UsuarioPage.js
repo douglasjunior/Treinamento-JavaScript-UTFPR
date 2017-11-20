@@ -19,7 +19,7 @@ export default class UsuarioPage extends Component {
         nome: '',
         email: '',
         senha: '',
-        nascimento: ''
+        nascimento: null,
     };
 
     onFormSubmit = (event) => {

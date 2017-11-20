@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'react-datepicker/dist/react-datepicker.css';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'moment/locale/pt-br';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
+import 'react-datepicker/dist/react-datepicker.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'moment/locale/pt-br';
 import axios from 'axios';
 import { BrowserRouter } from 'react-router-dom';
 
-axios.defaults.baseURL = "http://localhost:3001/api";
+axios.defaults.baseURL = process.env.NODE_ENV === 'development' ?
+    "http://localhost:3001/api" :
+    "/api";
 axios.defaults.withCredentials = true;
 
 /**

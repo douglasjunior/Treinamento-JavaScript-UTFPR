@@ -58,7 +58,6 @@ export default class InputForm extends Component {
                     <DatePicker
                         customInput={<Input id={id} valid={valid} style={{ display: 'inline' }} {...others} />}
                         dateFormat={dateFormat}
-                        locale="pt-br"
                         selected={value}
                         useWeekdaysShort={true}
                         showMonthDropdown={true}
