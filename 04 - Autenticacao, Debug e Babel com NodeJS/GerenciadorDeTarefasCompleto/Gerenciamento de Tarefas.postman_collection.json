@@ -8,9 +8,9 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:3000/usuarios",
+			"name": "http://localhost:3000/api/usuarios",
 			"request": {
-				"url": "http://localhost:3000/usuarios",
+				"url": "http://localhost:3000/api/usuarios",
 				"method": "POST",
 				"header": [
 					{
@@ -28,9 +28,9 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/usuarios/login",
+			"name": "http://localhost:3000/api/usuarios/login",
 			"request": {
-				"url": "http://localhost:3000/usuarios/login",
+				"url": "http://localhost:3000/api/usuarios/login",
 				"method": "POST",
 				"header": [
 					{
@@ -48,9 +48,9 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/usuarios/1",
+			"name": "http://localhost:3000/api/usuarios/1",
 			"request": {
-				"url": "http://localhost:3000/usuarios/1",
+				"url": "http://localhost:3000/api/usuarios/1",
 				"method": "GET",
 				"header": [
 					{
@@ -70,9 +70,9 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/usuarios/1",
+			"name": "http://localhost:3000/api/usuarios/1",
 			"request": {
-				"url": "http://localhost:3000/usuarios/1",
+				"url": "http://localhost:3000/api/usuarios/1",
 				"method": "PUT",
 				"header": [
 					{
@@ -95,9 +95,9 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/tarefas",
+			"name": "http://localhost:3000/api/tarefas",
 			"request": {
-				"url": "http://localhost:3000/tarefas",
+				"url": "http://localhost:3000/api/tarefas",
 				"method": "POST",
 				"header": [
 					{
@@ -120,10 +120,10 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/tarefas",
+			"name": "http://localhost:3000/api/tarefas",
 			"request": {
 				"url": {
-					"raw": "http://localhost:3000/tarefas?titulo=aprender",
+					"raw": "http://localhost:3000/api/tarefas?titulo=aprender",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -164,9 +164,9 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/tarefas/1",
+			"name": "http://localhost:3000/api/tarefas/1",
 			"request": {
-				"url": "http://localhost:3000/tarefas/1",
+				"url": "http://localhost:3000/api/tarefas/1",
 				"method": "GET",
 				"header": [
 					{
@@ -189,9 +189,9 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/tarefas/1",
+			"name": "http://localhost:3000/api/tarefas/1",
 			"request": {
-				"url": "http://localhost:3000/tarefas/1",
+				"url": "http://localhost:3000/api/tarefas/1",
 				"method": "DELETE",
 				"header": [
 					{
@@ -214,9 +214,9 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/tarefas/1",
+			"name": "http://localhost:3000/api/tarefas/1",
 			"request": {
-				"url": "http://localhost:3000/tarefas/1",
+				"url": "http://localhost:3000/api/tarefas/1",
 				"method": "PUT",
 				"header": [
 					{

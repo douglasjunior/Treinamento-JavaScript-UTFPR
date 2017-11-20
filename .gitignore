@@ -1,6 +1,4 @@
 node_modules
 dist
-package-lock.json
 *.sqlite
-yarn.lock
 *.apk
