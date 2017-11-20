@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "run-s build serve",
+    "start": "run-s clean build serve",
+    "clean": "rm -rf dist",
     "serve": "cross-env NODE_ENV=production node dist/index.js",
     "build": "babel . --delete-dir-on-start -d dist --copy-files --source-maps --ignore node_modules,dist,package.json,package-lock.json,yarn.lock",
     "dev": "cross-env NODE_ENV=development DEBUG=http:* nodemon index.js --exec babel-node"
